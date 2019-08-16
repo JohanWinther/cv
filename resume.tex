@@ -1,0 +1,98 @@
+\documentclass[11pt,a4paper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+
+\newcommand{\company}{company}
+\input{resume-data}
+
+% moderncv themes
+\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+\moderncvcolor{\company}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+
+\usepackage{multicol}
+
+% character encoding
+\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+\usepackage[T1]{fontenc}
+\usepackage[defaultsans]{opensans}
+
+\DeclareRobustCommand\ebseries{\fontseries{eb}\selectfont}
+\DeclareRobustCommand\sbseries{\fontseries{sb}\selectfont}
+\DeclareRobustCommand\ltseries{\fontseries{l}\selectfont}
+\DeclareRobustCommand\clseries{\fontseries{cl}\selectfont}
+
+\DeclareTextFontCommand{\texteb}{\ebseries}
+\DeclareTextFontCommand{\textsb}{\sbseries}
+\DeclareTextFontCommand{\textlt}{\ltseries}
+\DeclareTextFontCommand{\textcl}{\clseries}
+
+
+% adjust the page margins
+\newlength{\marginlength}
+\setlength{\marginlength}{0.5in}
+
+\usepackage[margin=\marginlength]{geometry}
+\setlength{\hintscolumnwidth}{2cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\tcbset{%
+  colback=color1,
+  colframe=white!0,
+  coltext=white,
+  nobeforeafter,
+  %sharp corners=all,
+  size=small,
+  fontupper=\footnotesize,
+  height=1.5em,
+  halign=center,
+  valign=center,
+  boxrule=0pt,
+  tcbox raise=-4pt,
+}
+
+% personal data
+\name{\basicsgivenname}{\basicssurname}
+\title{\basicslabel}                               % optional, remove / comment the line if not wanted
+\address{\basicslocationaddress}{\basicslocationpostalCode{} \basicslocationcity, \basicslocationcountryCode}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
+\phone[mobile]{\basicsphone}                   % optional, remove / comment the line if not wanted; the optional "type" of the phone can be "mobile" (default), "fixed" or "fax"
+%\phone[fixed]{+2~(345)~678~901}
+%\phone[fax]{+3~(456)~789~012}
+\email{\basicsemail}                               % optional, remove / comment the line if not wanted
+%\homepage{\basicswebsite}                         % optional, remove / comment the line if not wanted
+\social[linkedin]{\basicsprofilesIusername}                        % optional, remove / comment the line if not wanted
+\social[github]{\basicsprofilesIIusername}                              % optional, remove / comment the line if not wanted
+%\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+%\photo[64pt][0.4pt]{picture}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+%\quote{\csname basicssummaries\company\endcsname}
+
+% bibliography adjustements (only useful if you make citations in your resume, or print a list of publications using BibTeX)
+%   to show numerical labels in the bibliography (default is to show no labels)
+%\makeatletter\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}\makeatother
+%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}
+%   to redefine the bibliography heading string ("Publications")
+%\renewcommand{\refname}{Articles}
+
+% bibliography with mutiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+
+\usepackage{wrapfig}
+\usepackage{enumitem,xcolor}
+
+\newenvironment{WrapText}[1][r]
+  {\wrapfigure{#1}{0.5\textwidth}\tcolorbox}
+  {\endtcolorbox\endwrapfigure}
+
+\begin{document}
+\sffamily
+
+\makecvtitle{}
+\vspace{-3em}
+
+\input{applications/\company-cv.tex}
+
+\end{document}

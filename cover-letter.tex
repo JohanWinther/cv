@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper,roman]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+\newcommand{\company}{company}
+\input{resume-data}
+
+\usepackage[\misclanguage]{babel}
+% moderncv themes
+\moderncvstyle{classic}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+\moderncvcolor{\company}                               % color options 'black', 'blue' (default), 'burgundy', 'green', 'grey', 'orange', 'purple' and 'red'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% character encoding
+\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+\usepackage[T1]{fontenc}
+\usepackage[defaultsans]{opensans}
+
+\DeclareRobustCommand\ebseries{\fontseries{eb}\selectfont}
+\DeclareRobustCommand\sbseries{\fontseries{sb}\selectfont}
+\DeclareRobustCommand\ltseries{\fontseries{l}\selectfont}
+\DeclareRobustCommand\clseries{\fontseries{cl}\selectfont}
+
+\DeclareTextFontCommand{\texteb}{\ebseries}
+\DeclareTextFontCommand{\textsb}{\sbseries}
+\DeclareTextFontCommand{\textlt}{\ltseries}
+\DeclareTextFontCommand{\textcl}{\clseries}
+
+\patchcmd{\makeletterclosing}{[3em]}{[1em]}{}{}
+
+% adjust the page margins
+\newlength{\marginlength}
+\setlength{\marginlength}{1in}
+
+% adjust the page margins
+\usepackage[margin=\marginlength]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+% personal data
+\name{\basicsgivenname}{\basicssurname}
+\title{\basicslabel}                               % optional, remove / comment the line if not wanted
+\address{\basicslocationaddress}{\basicslocationpostalCode{} \basicslocationcity, \basicslocationcountryCode}% optional, remove / comment the line if not wanted; the "postcode city" and "country" arguments can be omitted or provided empty
+\email{\basicsemail}                               % optional, remove / comment the line if not wanted
+\phone[mobile]{\basicsphone}                   % optional, remove / comment the line if not wanted; the optional "type" of the phone can be "mobile" (default), "fixed" or "fax"
+
+
+\makeatletter
+\renewcommand*{\makeletterclosing}{
+  \@closing\\[1em]%
+  {\par
+  \textbf{\@firstname~\@lastname}\\
+  \href{mailto:\@email}{\@email}\\
+  \@mobile}%
+  \ifthenelse{\isundefined{\@enclosure}}{}{%
+    \\%
+    \vfill%
+    {\color{color2}\itshape\enclname: \@enclosure}
+  }
+  \vspace{0.5em}
+  {\color{color1} \par\noindent\rule{\textwidth}{0.5em} }
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\makelettertitle}{%
+    % recompute lengths (in case we are switching from letter to resume, or vice versa)
+    \recomputeletterlengths%
+
+    \hfill%
+    % sender contact info
+    \begin{minipage}{.5\textwidth}%
+        \raggedleft%
+        \addressfont\textcolor{color2}{%
+            {\bfseries\upshape\@firstname~\@lastname}\@firstdetailselementfalse%
+            \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+                \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+                \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
+            \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+                \makenewline\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}%
+            \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\emaillink{\@email}}%
+            \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\httplink{\@homepage}}%
+            \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}}%
+    \end{minipage}
+    {\color{color1} \par\noindent\rule{\textwidth}{0.5em} }\newline
+    % recipient block
+    \begin{minipage}[t]{.5\textwidth}
+        \raggedright%
+        \addressfont%
+        {\bfseries\upshape\@recipientname}\\%
+        \@recipientaddress%
+    \end{minipage}
+    % date
+    \hfill% US style
+    %  \\[1em]% UK style
+    \@date\\[2em]% US informal style: "January 1, 1900"; UK formal style: "01/01/1900"
+    % opening
+    \raggedright%
+    \@opening\\[1.5em]%
+    % ensure no extra spacing after \makelettertitle due to a possible blank line
+    %  \ignorespacesafterend% not working
+    \hspace{0pt}\par\vspace{-\baselineskip}\vspace{-\parskip}}
+\makeatother
+
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+
+\begin{document}
+\sffamily
+
+\date{\today}
+
+\input{applications/\company-cl.tex}
+\newline
+
+\end{document}

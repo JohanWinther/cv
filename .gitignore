@@ -1,0 +1,13 @@
+*.fdb_latexmk
+*.aux
+*.log
+*.synctex*
+*.out
+*.fls
+*.pdf
+node_modules
+resume-data.tex
+resume*.json
+moderncvcolor*.sty
+*-cv.tex
+*-cl.tex
