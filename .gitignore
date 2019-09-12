@@ -11,3 +11,5 @@ resume*.json
 moderncvcolor*.sty
 *-cv.tex
 *-cl.tex
+applications
+.vscode/settings.json
